@@ -1,7 +1,7 @@
-from context import RunCtx
-from result import Result, SuccessResult, FailedResult, UndoneResult
-from context import info
-from text import from_str, Text
+from .context import RunCtx
+from .result import Result, SuccessResult, FailedResult, UndoneResult
+from .context import info
+from .text import from_str, Text
 
 from typing import Callable, Optional, List, Set
 import logging
@@ -94,5 +94,5 @@ class FnTask(Task):
         return self.name_result_text()
 
 def task(name: str, fn: TaskFn) -> None:
-    from mission import add_task_to_current
+    from .mission import add_task_to_current
     add_task_to_current(FnTask(name, fn))

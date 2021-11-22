@@ -1,7 +1,7 @@
-from task import SequenceTask, Task
-from context import RunCtx
-from result import UndoneResult
-from text import Text, from_str
+from .task import SequenceTask, Task
+from .context import RunCtx
+from .result import UndoneResult
+from .text import Text, from_str
 
 from collections import OrderedDict
 from typing import List, Optional

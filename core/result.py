@@ -1,5 +1,5 @@
-from context import RunCtx
-from text import Text, from_str
+from .context import RunCtx
+from .text import Text, from_str
 
 class Result:
     def text(self) -> Text:

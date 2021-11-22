@@ -1,5 +1,6 @@
+from .text import TextCtx
+
 from typing import Optional
-from text import TextCtx
 
 class Info:
     def __init__(self, text: TextCtx) -> None:
