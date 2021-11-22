@@ -7,7 +7,7 @@ from typing import Callable, Optional, List, Set
 import logging
 import traceback
 
-TaskFn = Callable[[RunCtx], Result]
+TaskFn = Callable[[RunCtx], Optional[Result]]
 
 class Task:
     def __init__(self, name: str) -> None:
@@ -79,12 +79,13 @@ class FnTask(Task):
     def run(self, ctx: RunCtx) -> None:
         logging.info('running task %s', self.name)
         try:
-            result = self.fn(ctx)
+            opt_result = self.fn(ctx)
+            result = SuccessResult() if opt_result is None else opt_result
         except Exception as e:
             result = FailedResult(from_str(str(e)))
             logging.info('failed to run task: %s', traceback.format_exc())
         self.result = result
-        logging.info('task %s done with result %s',  result.text().to_basic_str())
+        logging.info('task %s done with result %s', self.name, result.text().to_basic_str())
 
     def mark_result(self, result: Result) -> None:
         assert self.result is None, 'mark_result() called after task already had result'
